@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-
 import './DropFileInput.css';
 
 import { ImageConfig } from './ImageConfig'; 
@@ -36,7 +35,7 @@ const DropFileInput = props => {
     }
 
     return (
-        <>
+        <div >
             <div
                 ref={wrapperRef}
                 className="drop-file-input"
@@ -71,7 +70,7 @@ const DropFileInput = props => {
                     </div>
                 ) : null
             }
-        </>
+        </div>
     );
 }
 

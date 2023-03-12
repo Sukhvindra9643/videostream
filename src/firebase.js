@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-
+import {getDatabase} from "firebase/database"
 const firebaseConfig = {
   apiKey: "AIzaSyCCNYCSFsR4GW0trlj3EMeCqFFAF9k8LUI",
   authDomain: "videostream-e6f9a.firebaseapp.com",
@@ -13,3 +13,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const db = getDatabase();

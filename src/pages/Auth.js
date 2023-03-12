@@ -1,6 +1,6 @@
-import React, { Fragment, useRef, useState, useEffect } from "react";
+import React, { Fragment, useRef, useState} from "react";
 import "./Signin_Signup.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaLockOpen } from "react-icons/fa";
 import { CiFaceSmile } from "react-icons/ci";
@@ -8,9 +8,8 @@ import { getAuth,signInWithEmailAndPassword ,createUserWithEmailAndPassword } fr
 import { app } from "../firebase";
 const auth = getAuth(app);
 
-const Signin_Signup = () => {
+const Auth = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -30,7 +29,7 @@ const registerSubmit = (e) => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        navigate("/");
+        navigate("/")
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -41,7 +40,7 @@ const registerSubmit = (e) => {
 
 const loginSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password)
+
     signInWithEmailAndPassword(auth,loginEmail, loginPassword)
       .then((userCredential) => {
         // Signed in
@@ -163,4 +162,4 @@ const loading = false;
   );
 };
 
-export default Signin_Signup;
+export default Auth;
