@@ -14,7 +14,7 @@
 }
 .drop-file-input {
     position: relative;
-    width: 400px;
+    width: 370px;
     height: 200px;
     border: 2px dashed grey;
     border-radius: 20px;
@@ -104,14 +104,4 @@
 
 .drop-file-preview__item:hover .drop-file-preview__item__del {
     opacity: 1;
-}
-.button{
-    backgroundColor:"blue";
-    color:"white";
-    padding:"10px";
-    width:"200px";
-    borderRadius:"15px";
-    fontSize:"20px";
-    margin:"auto";
-    textAlign:"center"
 }

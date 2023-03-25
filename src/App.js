@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import Layout from "./components/Layout";
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home/>} />
-          <Route path="register" element={<Auth />} />
+          <Route path="login" element={<Auth />} />
           <Route path="create" element={<UploadVideo/>} />
           <Route path="videos" element={<Videos/>} />
           <Route path="video/:id" element={<VideoDetails/>} />

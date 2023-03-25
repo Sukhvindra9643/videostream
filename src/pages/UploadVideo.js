@@ -14,14 +14,13 @@ const storage = getStorage(app);
 const UploadVideo = () => {
   const [file, setFile] = useState(null);
   const [progressvalue,setProgressValue] = useState(null)
-  const [downloadURL,setDownloadURL] = useState(null)
   const onFileChange = (file) => {
     const currentFile = file[0];
     setFile(currentFile);
-    console.log(file);
   };
-  const uploadUrl = async()=>{
+  const uploadUrl = async(downloadURL)=>{
     const {name} = file;
+    console.log(downloadURL)
     const res = await fetch("https://videostream-e6f9a-default-rtdb.firebaseio.com/videos.json",
     {
       method:'POST',
@@ -67,20 +66,19 @@ const UploadVideo = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("File available at", downloadURL);
-          setDownloadURL(downloadURL)
-          uploadUrl()
+          uploadUrl(downloadURL)
         });
       }
       );
       
   };
-
+let window_width = window.innerWidth
   return (
     <div className="box">
       <h2 className="header">Drop files input</h2>
       <DropFileInput onFileChange={(file) => onFileChange(file)} />
       <br></br>
-      <div className="progress" style={{display: `${progressvalue === null?"none":"block"}`,marginBottom:"20px"}}>
+      <div className="progress" style={window_width <= 600 ? {display: `${progressvalue === null?"none":"block"}`,marginBottom:"20px",width:"95vw"}:{display: `${progressvalue === null?"none":"block"}`,marginBottom:"20px",width:"22vw"}}>
         <div
           className="progress-bar"
           role="progressbar"
@@ -95,6 +93,7 @@ const UploadVideo = () => {
       <button
         type="button"
         className="btn btn-primary"
+        style={window_width <= 600 ? {width:"95vw"}:{width:"22vw"}}
         onClick={() => handleClick()}
       >
         Upload

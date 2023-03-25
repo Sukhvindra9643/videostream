@@ -1,10 +1,14 @@
-import React, { Fragment, useRef, useState} from "react";
+import React, { Fragment, useRef, useState, useEffect } from "react";
 import "./Signin_Signup.css";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaLockOpen } from "react-icons/fa";
 import { CiFaceSmile } from "react-icons/ci";
-import { getAuth,signInWithEmailAndPassword ,createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { app } from "../firebase";
 const auth = getAuth(app);
 
@@ -15,21 +19,20 @@ const Auth = () => {
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
 
-  const [name,setName]= useState("");
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-const registerSubmit = (e) => {
+  const registerSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password)
-    createUserWithEmailAndPassword(auth,email, password)
+    console.log(email, password);
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        navigate("/")
+        // const user = userCredential.user;
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -38,14 +41,14 @@ const registerSubmit = (e) => {
       });
   };
 
-const loginSubmit = (e) => {
+  const loginSubmit = (e) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth,loginEmail, loginPassword)
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
+        // const user = userCredential.user;
+        // console.log(user);
         navigate("/");
       })
       .catch((error) => {
@@ -71,15 +74,17 @@ const loginSubmit = (e) => {
       loginTab.current.classList.add("shiftToLeft");
     }
   };
-const loading = false;
+  const loading = false;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Fragment>
       {loading ? (
-        //<Loader />
+        // <Loader />
         <h1>loading</h1>
       ) : (
         <Fragment>
-        
           <div className="LoginSignUpContainer">
             <div className="LoginSignUpBox">
               <div className="toggle">
@@ -127,7 +132,7 @@ const loading = false;
                     required
                     name="name"
                     value={name}
-                    onChange={(e)=>setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="signUpEmail">
@@ -138,7 +143,7 @@ const loading = false;
                     required
                     name="email"
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="signUpPassword">
@@ -149,7 +154,7 @@ const loading = false;
                     required
                     name="password"
                     value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <input type="submit" value="Register" className="signUpBtn" />
